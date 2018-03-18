@@ -58,8 +58,12 @@ gulp.task('fonts', () => (
 // Development server with browsersync
 gulp.task("server", ["hugo", "css", "js", "fonts"], () => {
   browserSync.init({
-    server: {
-      baseDir: "./dist"
+    proxy: {
+        target: "https://sviet.dev"
+    },
+    https: {
+        key: "/etc/apache2/ssl/localhost.key",
+        cert: "/etc/apache2/ssl/localhost.crt"
     }
   });
   gulp.watch("./src/js/**/*.js", ["js"]);
